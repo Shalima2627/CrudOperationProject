@@ -1,0 +1,25 @@
+# Python
+*.pyc
+__pycache__/
+env/
+venv/
+
+# Django
+db.sqlite3
+/media/
+*.log
+
+# Virtual Environment
+venv/
+
+# Editor files
+.idea/
+.vscode/
+*.swp
+
+# Node modules
+node_modules/
+
+# OS generated files
+.DS_Store
+Thumbs.db
