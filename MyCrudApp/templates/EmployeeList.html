@@ -1,0 +1,94 @@
+<!--Listing the created employees-->
+{% extends 'Base.html' %}
+
+{% block title %}
+<title>Employee List</title>
+{% endblock title %}
+
+{% block content %}
+<style>
+    .empinfohead {
+        border-radius: 2px;
+        border-style: solid;
+        border-width: 2px;
+        height: auto;
+        width: auto;
+        margin-top: 30px;
+        text-align: center;
+        padding: 5px 5px 5px 5px;
+    }
+    .search-container {
+        display: flex;
+    }
+    .search-container > input {
+        margin: 10px;
+        padding: 10px;
+    }
+    .form-list {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 10px;
+    }
+    th, td{
+        text-align: center;
+    }
+    .list-image {
+        transform: scale(0.5);
+        transform-origin: center;
+    }
+    .emp-det {
+        height: auto;
+        text-align: center;
+    }
+</style>
+<h1 class="empinfohead">Employee Information</h1>
+
+<!--Search Section-->
+<div class="form-list">
+        <form action="{% url 'list-emp' %}" method="post"></form>
+        <div class="search-container">
+                <input type="text" class="form-control" placeholder="Search By Employee Name, Role, Salary" name="serach_query" value="{{ serach_query }}">
+                <input type="submit" value="Search">
+        </div>
+    </form>
+</div>
+<br><br>
+<div>
+    <a href="{% url 'create-emp' %}"><button type="button">New Info</button></a>
+</div>
+<br><br>
+<!--Employee List-->
+<table class="table table-bordered table-sm" style="border: 1px solid black;">
+    <thead >
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Role</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for emp in employees %}
+        <tr class="emp-det">
+            <th class="list-image" scope="row">
+                <img src="{{ emp.imageURL }}" alt="...">
+            </th>
+            <th scope="row">{{ emp.emp_name }}</th>
+            <td>{{ emp.emp_email }}</td>
+            <td>{{ emp.emp_contact }}</td>
+            <td>{{ emp.emp_role }}</td>
+            <td>{{ emp.emp_salary }}</td>
+            <td>
+               <a href="{% url 'edit-emp' emp.id %}">Edit</a>
+                <a href="{% url 'delete-emp' emp.id %}">Remove</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
+
