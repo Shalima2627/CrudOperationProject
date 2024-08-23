@@ -26,5 +26,5 @@ urlpatterns = [
     path('',views.SearchEmployee,name='list-emp'),
     path('create/',views.CreateEmployee,name='create-emp'),
     path('edit/<str:pk>',views.EditEmployee,name='edit-emp'),
-    path('delete/<str:pk>',views.DeleteEmployee,name='delete-emp')
+    path('delete/<str:pk>',views.DeleteEmployee,name='delete-emp'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

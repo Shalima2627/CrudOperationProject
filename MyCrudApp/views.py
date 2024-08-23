@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib import messages 
 from .models import Employee
 from .forms import EmployeeForm
 from django.db.models import Q
@@ -11,7 +12,8 @@ def CreateEmployee(request):
         form = EmployeeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('create-emp')
+            messages.success(request,'The Employee has been Created Successfully')
+            return redirect('list-emp')
     
     context = {
         'form' : form,
@@ -27,11 +29,13 @@ def SearchEmployee(request):
     
     if request.GET.get('search_query'):
         search_query = request.GET.get('search_query')
+        print(f"Search Query: {search_query}")
         
     employees = Employee.objects.filter(Q(emp_name__icontains=search_query) |
                                         Q(emp_role__icontains=search_query) |
                                         Q(emp_salary__icontains=search_query)
                                         )
+    print(f"Employees Found: {employees}")
     context = {
         'employees' : employees,
         'search_query' : search_query,
@@ -72,4 +76,3 @@ def DeleteEmployee(request,pk):
     }
     
     return render(request,'EmployeeDelete.html',context)
-        

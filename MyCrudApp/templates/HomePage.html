@@ -1,7 +1,8 @@
 <!--create a employee-->
 {% extends 'Base.html' %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+{% load static %}
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui.min.js' %}"></script>
 
 {% block title %}
 <title>CREATE EMPLOYEE</title>
@@ -32,15 +33,18 @@
         </div>
          
     </form>
-
+{% comment %}
+   <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var messages = JSON.parse('{{ messages|json_script:"messages" }}');
+            if(messages.length > 0){
+                messages.forEach(function(message) {
+                    if(message.level == 'success') {
+                        alert(message.message)
+                    }
+                });
+            }
+        });
+    </script>
+-->{% endcomment %}
 {% endblock content %}
-
-{% block scripts %}
-
-<script>
-    document.getElementById('alertsubmit').addEventListener('click', function() {
-        alert('Successfully Submitted!!')
-    })
-</script>
-
-{% endblock scripts %}
